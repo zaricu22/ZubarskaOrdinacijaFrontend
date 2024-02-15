@@ -1,0 +1,113 @@
+<div class="row">
+  <div class="d-flex justify-content-center">
+    <table class="border">
+      <tr class="bg-secondary">
+        <th>Termin</th>
+        <th>Trajanje</th>
+        <th>Tip Pregleda</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+      <tr *ngIf="!this.termini?.length" class="bg-light text-center">
+        <td colspan="5">/</td>
+      </tr>
+      <tr *ngFor="let termin of this.termini" class="bg-light">
+        <td>{{ termin.termin | date: "short" }}</td>
+        <td>{{ termin.trajanje }}min</td>
+        <td>{{ termin.tipPregleda }}</td>
+        <td>{{ termin.status }}</td>
+        <td>
+          <button
+            *ngIf="termin.status == 'zakazano'"
+            (click)="otkazivanjeTermina(termin.termin)"
+          >
+            Otkazi
+          </button>
+          <p class="text-success" *ngIf="termin.status == 'otkazano'">
+            Otkazano
+          </p>
+        </td>
+      </tr>
+    </table>
+
+    <p class="text-danger">{{ this.porukaOtkazivanjeTermina }}</p>
+  </div>
+</div>
+
+<hr />
+
+<div class="row">
+  <div class="d-flex justify-content-center">
+    <form class="border border-dark p-3 w-25 rounded">
+      <h6>Zakazivanje Termina</h6>
+      <div class="form-group p-2">
+        <label for="termin">Datum:</label><br />
+        <input
+          id="termin"
+          type="date"
+          [(ngModel)]="this.izabranDatum"
+          name="termin"
+          placeholder="termin"
+        />
+      </div>
+      <div class="form-group p-2">
+        <label for="time">Vreme:</label><br />
+        <input
+          id="time"
+          type="time"
+          [(ngModel)]="this.izabranoVreme"
+          name="termin"
+          placeholder="termin"
+        />
+      </div>
+      <div class="form-group p-2">
+        <input
+          type="radio"
+          id="trajanje60"
+          name="trajanje"
+          [(ngModel)]="this.noviTermin.trajanje"
+          value="60"
+        />
+
+        <label for="trajanje60" class="pl-1">60min</label><br />
+      </div>
+
+      <div class="form-group p-2">
+        <input
+          type="radio"
+          id="trajanje30"
+          name="trajanje"
+          [(ngModel)]="this.noviTermin.trajanje"
+          value="30"
+        />
+        <label for="trajanje30" class="pl-1">30min</label><br />
+      </div>
+      <div class="form-group p-2">
+        <label for="tip">Tip Pregleda:</label><br />
+        <input
+          id="tip"
+          list="tipoviPregleda"
+          [(ngModel)]="this.noviTermin.tipPregleda"
+          name="tip"
+          placeholder="Opis Pregleda"
+        />
+
+        <datalist id="tipoviPregleda">
+          <option value="pregled"></option>
+          <option value="kontrola"></option>
+          <option value="vadjenje"></option>
+          <option value="plombiranje"></option>
+          <option value="operacija"></option>
+        </datalist>
+      </div>
+      <div class="form-group p-2">
+        <button type="submit" (click)="zakazivanjeTermina()">
+          Zakazi Termin
+        </button>
+      </div>
+      <p class="text-danger">
+        {{ this.porukaUnosTermina }}
+      </p>
+    </form>
+  </div>
+</div>

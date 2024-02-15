@@ -1,0 +1,71 @@
+<div *ngIf="!this.prijavaNeuspesna">
+  <div class="row">
+    <div class="w-25 mx-auto p-3 border border-dark rounded">
+      <form>
+        <h6>Prijava</h6>
+
+        <div class="form-group p-2">
+          <label for="brojTelefona">Unesite Identifikacioni Broj:</label><br />
+          <input
+            id="brojTelefona"
+            type="username"
+            [(ngModel)]="this.brojTelefona"
+            name="brojTelefona"
+            placeholder="Broj Telefona"
+          />
+        </div>
+        <div class="form-group p-2">
+          <button type="submit" (click)="this.korisnikProvera()">
+            Prijavi se
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="this.prijavaNeuspesna">
+  <div class="row">
+    <div class="w-25 mx-auto p-3 border border-dark rounded">
+      <form>
+        <h6>Evidentiranje u bazi korisnika</h6>
+
+        <div class="form-group p-2">
+          <label for="ime">Ime:</label><br />
+          <input
+            id="ime"
+            type="username"
+            [(ngModel)]="this.ime"
+            placeholder="ime"
+            name="ime"
+          />
+        </div>
+        <div class="form-group p-2">
+          <label for="prezime">Prezime:</label><br />
+          <input
+            id="prezime"
+            type="username"
+            [(ngModel)]="this.prezime"
+            placeholder="prezime"
+            name="prezime"
+          />
+        </div>
+        <div class="form-group p-2">
+          <label for="brojTelefona">Kontakt Telefona:</label><br />
+          <input
+            id="brojTelefona"
+            type="username"
+            [(ngModel)]="this.brojTelefona"
+            name="brojTelefona"
+            placeholder="Broj Telefona"
+          />
+        </div>
+        <div class="form-group p-2">
+          <button type="submit" (click)="this.korisnikUnos()">Sign in</button>
+        </div>
+
+        <p class="text-danger">{{ this.porukaGreske }}</p>
+      </form>
+    </div>
+  </div>
+</div>
